@@ -23,6 +23,15 @@ let sitmin;
 let sitmax;
 let pushmin;
 let pushmax;
+let hrmin;
+let hrmax;
+let rsitmin;
+let rsitmax;
+let plankmin;
+let plankmax;
+let shuttlemin;
+let shuttlemax;
+let runscore;
 
 //Pushup Score Arrays
 var maleLessThan25PushupScores = {
@@ -3305,8 +3314,8 @@ function minMaxValueAge() {
           (plankmax = 215),
           (runmin = 552),
           (runmax = 950),
-          (shuttleMin = 36),
-          (shuttleMax = 100),
+          (shuttlemin = 36),
+          (shuttlemax = 100),
           (walkmax = t("16:16")),
           (strengthAbsLink = "./web formatted jpgs/male_lessthan25_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_lessthan25_Run_Shuttle.webp"))
@@ -3323,8 +3332,8 @@ function minMaxValueAge() {
           (plankmax = 210),
           (runmin = 562),
           (runmax = 982),
-          (shuttleMin = 33),
-          (shuttleMax = 97),
+          (shuttlemin = 33),
+          (shuttlemax = 97),
           (walkmax = t("16:16")),
           (strengthAbsLink = "./web formatted jpgs/male_25-29_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_25-29_cardio.webp"))
@@ -3341,8 +3350,8 @@ function minMaxValueAge() {
           (plankmax = 205),
           (runmin = 574),
           (runmax = 1017),
-          (shuttleMin = 30),
-          (shuttleMax = 94),
+          (shuttlemin = 30),
+          (shuttlemax = 94),
           (walkmax = t("16:18")),
           (strengthAbsLink = "./web formatted jpgs/male_30-34_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_30-34_cardio.webp"))
@@ -3359,8 +3368,8 @@ function minMaxValueAge() {
           (plankmax = 200),
           (runmin = 585),
           (runmax = 1054),
-          (shuttleMin = 36),
-          (shuttleMax = 100),
+          (shuttlemin = 36),
+          (shuttlemax = 100),
           (walkmax = t("16:18")),
           (strengthAbsLink = "./web formatted jpgs/male_35-39_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_35-39_cardio.webp"))
@@ -3377,8 +3386,8 @@ function minMaxValueAge() {
           (plankmax = 195),
           (runmin = 598),
           (runmax = 1094),
-          (shuttleMin = 24),
-          (shuttleMax = 88),
+          (shuttlemin = 24),
+          (shuttlemax = 88),
           (walkmax = t("16:23")),
           (strengthAbsLink = "./web formatted jpgs/male_40-44_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_40-44_Run_Shuttle.webp"))
@@ -3395,8 +3404,8 @@ function minMaxValueAge() {
           (plankmax = 190),
           (runmin = 610),
           (runmax = 1136),
-          (shuttleMin = 22),
-          (shuttleMax = 86),
+          (shuttlemin = 22),
+          (shuttlemax = 86),
           (walkmax = t("16:23")),
           (strengthAbsLink = "./web formatted jpgs/male_45-49_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_45-49_cardio.webp"))
@@ -3413,8 +3422,8 @@ function minMaxValueAge() {
           (plankmax = 185),
           (runmin = 637),
           (runmax = 1233),
-          (shuttleMin = 16),
-          (shuttleMax = 80),
+          (shuttlemin = 16),
+          (shuttlemax = 80),
           (walkmax = t("16:40")),
           (strengthAbsLink = "./web formatted jpgs/male_50-54_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_50-54_cardio.webp"))
@@ -3431,8 +3440,8 @@ function minMaxValueAge() {
           (plankmax = 180),
           (runmin = 651),
           (runmax = 1288),
-          (shuttleMin = 13),
-          (shuttleMax = 77),
+          (shuttlemin = 13),
+          (shuttlemax = 77),
           (walkmax = t("16:40")),
           (strengthAbsLink = "./web formatted jpgs/male_55-59_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_55-59_cardio.webp"))
@@ -3449,8 +3458,8 @@ function minMaxValueAge() {
           (plankmax = 175),
           (runmin = 682),
           (runmax = 1348),
-          (shuttleMin = 10),
-          (shuttleMax = 71),
+          (shuttlemin = 10),
+          (shuttlemax = 71),
           (walkmax = t("16:58")),
           (strengthAbsLink = "./web formatted jpgs/male_over60_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_over60_cardio.webp"))
@@ -3467,8 +3476,8 @@ function minMaxValueAge() {
           (plankmax = 210),
           (runmin = t("10:23")),
           (runmax = t("18:56")),
-          (shuttleMin = 22),
-          (shuttleMax = 83),
+          (shuttlemin = 22),
+          (shuttlemax = 83),
           (walkmax = t("17:22")),
           (strengthAbsLink = "./web formatted jpgs/female_lessthan25_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_lessthan25_cardio.webp"))
@@ -3485,8 +3494,8 @@ function minMaxValueAge() {
           (plankmax = 205),
           (runmin = t("10:37")),
           (runmax = t("19:43")),
-          (shuttleMin = 19),
-          (shuttleMax = 80),
+          (shuttlemin = 19),
+          (shuttlemax = 80),
           (walkmax = t("17:22")),
           (strengthAbsLink = "./web formatted jpgs/female_25-29_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_25-29_cardio.webp"))
@@ -3503,8 +3512,8 @@ function minMaxValueAge() {
           (plankmax = 200),
           (runmin = t("10:51")),
           (runmax = t("20:33")),
-          (shuttleMin = 16),
-          (shuttleMax = 77),
+          (shuttlemin = 16),
+          (shuttlemax = 77),
           (walkmax = t("17:28")),
           (strengthAbsLink = "./web formatted jpgs/female_30-34_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_30-34_cardio.webp"))
@@ -3521,8 +3530,8 @@ function minMaxValueAge() {
           (plankmax = 195),
           (runmin = t("11:06")),
           (runmax = t("21:28")),
-          (shuttleMin = 13),
-          (shuttleMax = 74),
+          (shuttlemin = 13),
+          (shuttlemax = 74),
           (walkmax = t("17:28")),
           (strengthAbsLink = "./web formatted jpgs/female_35-39_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_35-39_cardio.webp"))
@@ -3539,8 +3548,8 @@ function minMaxValueAge() {
           (plankmax = 190),
           (runmin = t("11:22")),
           (runmax = t("22:28")),
-          (shuttleMin = 10),
-          (shuttleMax = 71),
+          (shuttlemin = 10),
+          (shuttlemax = 71),
           (walkmax = t("17:49")),
           (strengthAbsLink = "./web formatted jpgs/female_40-44_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_40-44_cardio.webp"))
@@ -3557,8 +3566,8 @@ function minMaxValueAge() {
           (plankmax = 185),
           (runmin = t("11:38")),
           (runmax = t("23:34")),
-          (shuttleMin = 7),
-          (shuttleMax = 68),
+          (shuttlemin = 7),
+          (shuttlemax = 68),
           (walkmax = t("17:49")),
           (strengthAbsLink = "./web formatted jpgs/female_45-49_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_45-49_cardio.webp"))
@@ -3575,8 +3584,8 @@ function minMaxValueAge() {
           (plankmax = 180),
           (runmin = t("12:53")),
           (runmax = t("24:46")),
-          (shuttleMin = 5),
-          (shuttleMax = 56),
+          (shuttlemin = 5),
+          (shuttlemax = 56),
           (walkmax = t("18:11")),
           (strengthAbsLink = "./web formatted jpgs/female_50-54_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_50-54_cardio.webp"))
@@ -3593,8 +3602,8 @@ function minMaxValueAge() {
           (plankmax = 175),
           (runmin = t("13:14")),
           (runmax = t("26:06")),
-          (shuttleMin = 2),
-          (shuttleMax = 54),
+          (shuttlemin = 2),
+          (shuttlemax = 54),
           (walkmax = t("18:11")),
           (strengthAbsLink = "./web formatted jpgs/female_55-59_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_55-59_cardio.webp"))
@@ -3611,21 +3620,166 @@ function minMaxValueAge() {
           (plankmax = 170),
           (runmin = t("14:00")),
           (runmax = t("27:27")),
-          (shuttleMin = 1),
-          (shuttleMax = 48),
+          (shuttlemin = 1),
+          (shuttlemax = 48),
           (walkmax = t("18:53")),
           (strengthAbsLink = "./web formatted jpgs/female_over60_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_over60_cardio.webp"));
 }
 minMaxValueAge();
 
-function setScoreArrays() { 
-    let e = ageSel.value; 
-    e = sexSel.value + " " + e; 
-    let n = pushSel.value, 
-    r = sitSel.value, 
-    s = runSel.value; 
-    "Male < 25" == e ? ("Pushups" == n && (scoreArrays.strength = maleLessThan25PushupScores), "Situps" == r && (scoreArrays.abs = maleLessThan25SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = maleLessThan25RunScores), "Hand-Release" == n && (scoreArrays.strength = maleLessThan25HRPushupScores), "Plank" == r && (scoreArrays.abs = maleLessThan25PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = maleLessThan25RSitupScores), "Shuttle" == s && (scoreArrays.cardio = maleLessThan25ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresLessThan30Male)) : "Male 25-29" == e ? ("Pushups" == n && (scoreArrays.strength = male25To29PushupScores), "Situps" == r && (scoreArrays.abs = male25To29SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male25To29RunScores), "Hand-Release" == n && (scoreArrays.strength = male25To29HRPushupScores), "Plank" == r && (scoreArrays.abs = male25To29PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male25To29RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male25To29ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresLessThan30Male)) : "Male 30-34" == e ? ("Pushups" == n && (scoreArrays.strength = male30To34PushupScores), "Situps" == r && (scoreArrays.abs = male30To34SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male30To34RunScores), "Hand-Release" == n && (scoreArrays.strength = male30To34HRPushupScores), "Plank" == r && (scoreArrays.abs = male30To34PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male30To34RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male30To34ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores30To39Male)) : "Male 35-39" == e ? ("Pushups" == n && (scoreArrays.strength = male35To39PushupScores), "Situps" == r && (scoreArrays.abs = male35To39SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male35To39RunScores), "Hand-Release" == n && (scoreArrays.strength = male35To39HRPushupScores), "Plank" == r && (scoreArrays.abs = male35To39PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male35To39RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male35To39ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores30To39Male)) : "Male 40-44" == e ? ("Pushups" == n && (scoreArrays.strength = male40To44PushupScores), "Situps" == r && (scoreArrays.abs = male40To44SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male40To44RunScores), "Hand-Release" == n && (scoreArrays.strength = male40To44HRPushupScores), "Plank" == r && (scoreArrays.abs = male40To44PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male40To44RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male40To44ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores40To49Male)) : "Male 45-49" == e ? ("Pushups" == n && (scoreArrays.strength = male45To49PushupScores), "Situps" == r && (scoreArrays.abs = male45To49SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male45To49RunScores), "Hand-Release" == n && (scoreArrays.strength = male45To49HRPushupScores), "Plank" == r && (scoreArrays.abs = male45To49PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male45To49RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male45To49ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores40To49Male)) : "Male 50-54" == e ? ("Pushups" == n && (scoreArrays.strength = male50To54PushupScores), "Situps" == r && (scoreArrays.abs = male50To54SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male50To54RunScores), "Hand-Release" == n && (scoreArrays.strength = male50To54HRPushupScores), "Plank" == r && (scoreArrays.abs = male50To54PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male50To54RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male50To54ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores50To59Male)) : "Male 55-59" == e ? ("Pushups" == n && (scoreArrays.strength = male55To59PushupScores), "Situps" == r && (scoreArrays.abs = male55To59SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = male55To59RunScores), "Hand-Release" == n && (scoreArrays.strength = male55To59HRPushupScores), "Plank" == r && (scoreArrays.abs = male55To59PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = male55To59RSitupScores), "Shuttle" == s && (scoreArrays.cardio = male55To59ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores50To59Male)) : "Male >60" == e ? ("Pushups" == n && (scoreArrays.strength = maleGreaterThan60PushupScores), "Situps" == r && (scoreArrays.abs = maleGreaterThan60SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = maleGreaterThan60RunScores), "Hand-Release" == n && (scoreArrays.strength = maleGreaterThan60HRPushupScores), "Plank" == r && (scoreArrays.abs = maleGreaterThan60PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = maleGreaterThan60RSitupScores), "Shuttle" == s && (scoreArrays.cardio = maleGreaterThan60ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresGreaterThan60Male)) : "Female < 25" == e ? ("Pushups" == n && (scoreArrays.strength = femaleLessThan25PushupScores), "Situps" == r && (scoreArrays.abs = femaleLessThan25SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = femaleLessThan25RunScores), "Hand-Release" == n && (scoreArrays.strength = femaleLessThan25HRPushupScores), "Plank" == r && (scoreArrays.abs = femaleLessThan25PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = femaleLessThan25RSitupScores), "Shuttle" == s && (scoreArrays.cardio = femaleLessThan25ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresLessThan30Female)) : "Female 25-29" == e ? ("Pushups" == n && (scoreArrays.strength = female25To29PushupScores), "Situps" == r && (scoreArrays.abs = female25To29SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female25To29RunScores), "Hand-Release" == n && (scoreArrays.strength = female25To29HRPushupScores), "Plank" == r && (scoreArrays.abs = female25To29PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female25To29RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female25To29ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresLessThan30Female)) : "Female 30-34" == e ? ("Pushups" == n && (scoreArrays.strength = female30To34PushupScores), "Situps" == r && (scoreArrays.abs = female30To34SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female30To34RunScores), "Hand-Release" == n && (scoreArrays.strength = female30To34HRPushupScores), "Plank" == r && (scoreArrays.abs = female30To34PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female30To34RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female30To34ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores30To39Female)) : "Female 35-39" == e ? ("Pushups" == n && (scoreArrays.strength = female35To39PushupScores), "Situps" == r && (scoreArrays.abs = female35To39SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female35To39RunScores), "Hand-Release" == n && (scoreArrays.strength = female35To39HRPushupScores), "Plank" == r && (scoreArrays.abs = female35To39PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female35To39RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female35To39ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores30To39Female)) : "Female 40-44" == e ? ("Pushups" == n && (scoreArrays.strength = female40To44PushupScores), "Situps" == r && (scoreArrays.abs = female40To44SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female40To44RunScores), "Hand-Release" == n && (scoreArrays.strength = female40To44HRPushupScores), "Plank" == r && (scoreArrays.abs = female40To44PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female40To44RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female40To44ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores40To49Female)) : "Female 45-49" == e ? ("Pushups" == n && (scoreArrays.strength = female45To49PushupScores), "Situps" == r && (scoreArrays.abs = female45To49SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female45To49RunScores), "Hand-Release" == n && (scoreArrays.strength = female45To49HRPushupScores), "Plank" == r && (scoreArrays.abs = female45To49PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female45To49RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female45To49ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores40To49Female)) : "Female 50-54" == e ? ("Pushups" == n && (scoreArrays.strength = female50To54PushupScores), "Situps" == r && (scoreArrays.abs = female50To54SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female50To54RunScores), "Hand-Release" == n && (scoreArrays.strength = female50To54HRPushupScores), "Plank" == r && (scoreArrays.abs = female50To54PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female50To54RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female50To54ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores50To59Female)) : "Female 55-59" == e ? ("Pushups" == n && (scoreArrays.strength = female55To59PushupScores), "Situps" == r && (scoreArrays.abs = female55To59SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = female55To59RunScores), "Hand-Release" == n && (scoreArrays.strength = female55To59HRPushupScores), "Plank" == r && (scoreArrays.abs = female55To59PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = female55To59RSitupScores), "Shuttle" == s && (scoreArrays.cardio = female55To59ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScores50To59Female)) : "Female >60" == e && ("Pushups" == n && (scoreArrays.strength = femaleGreaterThan60PushupScores), "Situps" == r && (scoreArrays.abs = femaleGreaterThan60SitupScores), "1.5 Mile" == s && (scoreArrays.cardio = femaleGreaterThan60RunScores), "Hand-Release" == n && (scoreArrays.strength = femaleGreaterThan60HRPushupScores), "Plank" == r && (scoreArrays.abs = femaleGreaterThan60PlankScores), "Reverse Crunch" == r && (scoreArrays.abs = femaleGreaterThan60RSitupScores), "Shuttle" == s && (scoreArrays.cardio = femaleGreaterThan60ShuttleScores), "Walk" == s && (scoreArrays.cardio = walkScoresGreaterThan60Female)) 
+function setScoreArrays() {
+  let age = ageSel.value;
+  let sex = sexSel.value;
+  age = sex + " " + age;
+  let push = pushSel.value;
+  let sit = sitSel.value;
+  let run = runSel.value;
+  if(age == 'Male < 25') {
+    if (push=="Pushups") {scoreArrays.strength = maleLessThan25PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = maleLessThan25SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = maleLessThan25RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = maleLessThan25HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = maleLessThan25PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = maleLessThan25RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = maleLessThan25ShuttleScores}
+  } else if(age == 'Male 25-29') {
+    if (push=="Pushups") {scoreArrays.strength = male25To29PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male25To29SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male25To29RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male25To29HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male25To29PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male25To29RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male25To29ShuttleScores}
+  } else if(age == 'Male 30-34') {
+    if (push=="Pushups") {scoreArrays.strength = male30To34PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male30To34SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male30To34RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male30To34HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male30To34PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male30To34RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male30To34ShuttleScores}
+  } else if(age == 'Male 35-39') {
+    if (push=="Pushups") {scoreArrays.strength = male35To39PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male35To39SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male35To39RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male35To39HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male35To39PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male35To39RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male35To39ShuttleScores}
+  } else if(age == 'Male 40-44') {
+    if (push=="Pushups") {scoreArrays.strength = male40To44PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male40To44SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male40To44RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male40To44HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male40To44PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male40To44RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male40To44ShuttleScores}
+  } else if(age == 'Male 45-49') {
+    if (push=="Pushups") {scoreArrays.strength = male45To49PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male45To49SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male45To49RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male45To49HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male45To49PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male45To49RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male45To49ShuttleScores}
+  } else if(age == 'Male 50-54') {
+    if (push=="Pushups") {scoreArrays.strength = male50To54PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male50To54SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male50To54RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male50To54HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male50To54PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male50To54RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male50To54ShuttleScores}
+  } else if(age == 'Male 55-59') {
+    if (push=="Pushups") {scoreArrays.strength = male55To59PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = male55To59SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = male55To59RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = male55To59HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = male55To59PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = male55To59RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = male55To59ShuttleScores}
+  } else if(age == 'Male > 60') {
+    if (push=="Pushups") {scoreArrays.strength = maleGreaterThan60PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = maleGreaterThan60SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = maleGreaterThan60RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = maleGreaterThan60HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = maleGreaterThan60PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = maleGreaterThan60RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = maleGreaterThan60ShuttleScores}
+  } else if(age == 'Female < 25') {
+    if (push=="Pushups") {scoreArrays.strength = femaleLessThan25PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = femaleLessThan25SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = femaleLessThan25RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = femaleLessThan25HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = femaleLessThan25PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = femaleLessThan25RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = femaleLessThan25ShuttleScores}
+  } else if(age == 'Female 25-29') {
+    if (push=="Pushups") {scoreArrays.strength = female25To29PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female25To29SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female25To29RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female25To29HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female25To29PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female25To29RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female25To29ShuttleScores}
+  } else if(age == 'Female 30-34') {
+    if (push=="Pushups") {scoreArrays.strength = female30To34PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female30To34SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female30To34RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female30To34HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female30To34PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female30To34RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female30To34ShuttleScores}
+  } else if(age == 'Female 35-39') {
+    if (push=="Pushups") {scoreArrays.strength = female35To39PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female35To39SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female35To39RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female35To39HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female35To39PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female35To39RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female35To39ShuttleScores}
+  } else if(age == 'Female 40-44') {
+    if (push=="Pushups") {scoreArrays.strength = female40To44PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female40To44SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female40To44RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female40To44HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female40To44PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female40To44RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female40To44ShuttleScores}
+  } else if(age == 'Female 45-49') {
+    if (push=="Pushups") {scoreArrays.strength = female45To49PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female45To49SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female45To49RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female45To49HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female45To49PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female45To49RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female45To49ShuttleScores}
+  } else if(age == 'Female 50-54') {
+    if (push=="Pushups") {scoreArrays.strength = female50To54PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female50To54SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female50To54RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female50To54HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female50To54PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female50To54RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female50To54ShuttleScores}
+  } else if(age == 'Female 55-59') {
+    if (push=="Pushups") {scoreArrays.strength = female55To59PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = female55To59SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = female55To59RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = female55To59HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = female55To59PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = female55To59RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = female55To59ShuttleScores}
+  } else if(age == 'Female > 60') {
+    if (push=="Pushups") {scoreArrays.strength = femaleGreaterThan60PushupScores;}
+    if (sit=="Situps") {scoreArrays.abs = femaleGreaterThan60SitupScores;}
+    if (run=="1.5 Mile") {scoreArrays.cardio = femaleGreaterThan60RunScores;}
+    if (push=="Hand-Release") {scoreArrays.strength = femaleGreaterThan60HRPushupScores}
+    if (sit=="Plank") {scoreArrays.abs = femaleGreaterThan60PlankScores}
+    if (sit=="Reverse Crunch") {scoreArrays.abs = femaleGreaterThan60RSitupScores}
+    if (run=="Shuttle") {scoreArrays.cardio = femaleGreaterThan60ShuttleScores}
+  }
 }
 setScoreArrays();
 
@@ -3685,8 +3839,14 @@ function changeTxtboxes(txt1, txt2, slider) {
         txt1.value = slider.value;
     }
 }
-changeTxtboxes(mintxt, sectxt, runSlider);
-changeTxtboxes(pushtxt, pushSlider);
+
+function changeAllTxtboxes() {
+  changeTxtboxes(mintxt, sectxt, runSlider);
+  changeTxtboxes(pushtxt, pushSlider);
+  changeTxtboxes(sittxt, sitSlider);
+}
+changeAllTxtboxes();
+
 
 function calculateRunScore(e, n) { let r; for (let s = 0; s < n.length; s++) { r = n[s]; let a = r.range.split(" - ")[0], o = r.range.split(" - ")[1]; if (e >= hms(a) && e <= hms(o)) return r.points } return 0 } 
     
@@ -3700,6 +3860,7 @@ function didWalkPass(e, n) { return e <= hms(n.cardio.max) }
 
 function updateScoreMinMaxText() {
     runscore = calculateRunScore(runSlider.value, scoreArrays.cardio);
+    console.log(runSlider.value);
     runtxt_p.innerHTML = "Run Score: " + runscore + " | Min: " + runTimeString(runmin) + " | Max: " + runTimeString(runmax);
     sitscore = calculateSitupsScore(sitSlider.value, scoreArrays);
     sittxt_p.innerHTML = "Abs Score: " + sitscore + " | Min: " + sitmin + " | Max: " + sitmax;
@@ -3708,16 +3869,32 @@ function updateScoreMinMaxText() {
 }
 updateScoreMinMaxText();
 
+function updateSliderValues() {
+  runSlider.min = runmin;
+  runSlider.max = runmax;
+  runSlider.value = runmax.toString();
+}
+updateSliderValues();
+
 function runSlideInput() {
   changeLapTime();
   updateScoreMinMaxText();
   changeTxtboxes(mintxt, sectxt, runSlider);
 }
 runSlider.addEventListener('input', runSlideInput);
-runSlider.removeEventListener('input', runSlideInput);
 
 pushSel.addEventListener('change', () => {
-  pushSlider.min = 20;
-  pushSlider.max = 50;
+  pushSlider.max = pushmax;
   changeTxtboxes(pushtxt, pushSlider);
 });
+
+function ageSexChange() {
+  minMaxValueAge();
+  setScoreArrays();
+  updateSliderValues();
+  updateScoreMinMaxText();
+  changeAllTxtboxes();
+  changeLapTime();
+}
+ageSel.addEventListener('change', ageSexChange);
+sexSel.addEventListener('change', ageSexChange);
