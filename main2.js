@@ -3859,10 +3859,11 @@ function calculateSitupsScore(e, n) { let r = e.toString(); return isNaN(n.abs[r
 function didWalkPass(e, n) { return e <= hms(n.cardio.max) }
 
 function updateScoreMinMaxText() {
-  let min = pushSel.value == 'Pushups' ? pushmin : pushSel.value == 'Hand-Release' ? hrmin : 'EXEMPT';
+  let min = pushSel.value == 'Pushups' ? pushmin : pushSel.value == 'Hand-Release' ? hrmin : '';
   let max = pushSel.value == 'Pushups' ? pushmax : pushSel.value == 'Hand-Release' ? hrmax : '';
-    pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
-    pushtxt_p.innerHTML = "Strength Score: " + pushscore + " | Min: " + min + " | Max: " + max;
+  pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
+  pushtxt_p.innerHTML = pushSel.value == 'Exempt' ? "Strength Score: EXEMPT" : "Strength Score: " + pushscore + " | Min: " + min + " | Max: " + max;
+  
 
     runscore = calculateRunScore(runSlider.value, scoreArrays.cardio);
     console.log(runSlider.value);
@@ -3904,8 +3905,12 @@ sitSlider.addEventListener('input', sitSlideInput);
 pushSel.addEventListener('change', () => {
   if (pushSel.value == "Pushups") {
     pushSlider.max = pushmax;
+    pushSlider.removeAttribute('disabled');
   } else if (pushSel.value == "Hand-Release") {
     pushSlider.max = hrmax;
+    pushSlider.removeAttribute('disabled');
+  } else if (pushSel.value == "Exempt") {
+    pushSlider.disabled = true;
   }
   changeTxtboxes(pushtxt, pushSlider);
   updateScoreMinMaxText();
