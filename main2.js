@@ -3859,20 +3859,26 @@ function calculateSitupsScore(e, n) { let r = e.toString(); return isNaN(n.abs[r
 function didWalkPass(e, n) { return e <= hms(n.cardio.max) }
 
 function updateScoreMinMaxText() {
+  let min = pushSel.value == 'Pushups' ? pushmin : pushSel.value == 'Hand-Release' ? hrmin : 'EXEMPT';
+  let max = pushSel.value == 'Pushups' ? pushmax : pushSel.value == 'Hand-Release' ? hrmax : '';
+    pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
+    pushtxt_p.innerHTML = "Strength Score: " + pushscore + " | Min: " + min + " | Max: " + max;
+
     runscore = calculateRunScore(runSlider.value, scoreArrays.cardio);
     console.log(runSlider.value);
     runtxt_p.innerHTML = "Run Score: " + runscore + " | Min: " + runTimeString(runmin) + " | Max: " + runTimeString(runmax);
     sitscore = calculateSitupsScore(sitSlider.value, scoreArrays);
     sittxt_p.innerHTML = "Abs Score: " + sitscore + " | Min: " + sitmin + " | Max: " + sitmax;
-    pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
-    pushtxt_p.innerHTML = "Strength Score: " + pushscore + " | Min: " + pushmin + " | Max: " + pushmax;
 }
 updateScoreMinMaxText();
 
 function updateSliderValues() {
   runSlider.min = runmin;
   runSlider.max = runmax;
-  runSlider.value = runmax.toString();
+  pushSlider.min = 0;
+  pushSlider.max = pushmax;
+  sitSlider.min = 0;
+  sitSlider.max = sitmax;
 }
 updateSliderValues();
 
@@ -3883,9 +3889,26 @@ function runSlideInput() {
 }
 runSlider.addEventListener('input', runSlideInput);
 
-pushSel.addEventListener('change', () => {
-  pushSlider.max = pushmax;
+function pushSlideInput() {
+  updateScoreMinMaxText();
   changeTxtboxes(pushtxt, pushSlider);
+}
+pushSlider.addEventListener('input', pushSlideInput);
+
+function sitSlideInput() {
+  updateScoreMinMaxText();
+  changeTxtboxes(sittxt, sitSlider);
+}
+sitSlider.addEventListener('input', sitSlideInput);
+
+pushSel.addEventListener('change', () => {
+  if (pushSel.value == "Pushups") {
+    pushSlider.max = pushmax;
+  } else if (pushSel.value == "Hand-Release") {
+    pushSlider.max = hrmax;
+  }
+  changeTxtboxes(pushtxt, pushSlider);
+  updateScoreMinMaxText();
 });
 
 function ageSexChange() {
