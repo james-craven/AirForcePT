@@ -16,6 +16,9 @@ const sittxt = document.getElementsByClassName('sit-txt')[0];
 const pushSel = document.getElementById('push-sel');
 const sitSel = document.getElementById('sit-sel');
 const runSel = document.getElementById('cardio-sel');
+const absSeeChartBtn = document.getElementById('abs-see-chart-btn');
+const sitSection = document.getElementById('sit-sel-chart-section');
+const plankmintxt = document.getElementById('plankmintxt');
 
 let runmin;
 let runmax;
@@ -3915,6 +3918,42 @@ pushSel.addEventListener('change', () => {
   changeTxtboxes(pushtxt, pushSlider);
   updateScoreMinMaxText();
 });
+
+function togglePlank() {
+  if (sitSel.value != 'Plank') {
+      absSeeChartBtn.classList.remove('plank-see-chart-btn');
+      sitSection.classList.remove('sit-sel-chart-plank');
+      plankmintxt.style.display = 'none';
+      document.getElementsByClassName('plank-colon')[0].setAttribute('hidden', true);
+  } else {
+      absSeeChartBtn.classList.add('plank-see-chart-btn');
+      sitSection.classList.add('sit-sel-chart-plank');
+      plankmintxt.style.display = 'grid';
+      document.getElementsByClassName('plank-colon')[0].removeAttribute('hidden');
+  }
+}
+
+sitSel.addEventListener('change', () => {
+  if (sitSel.value == "Situps") {
+      sitSlider.max = sitmax;
+      togglePlank();
+      sitSlider.removeAttribute('disabled');
+    } else if (sitSel.value == "Reverse Crunch") {
+      sitSlider.max = rsitmax;
+      togglePlank();
+      sitSlider.removeAttribute('disabled');
+    } else if (sitSel.value == 'Plank') {
+      sitSlider.max = plankmax;
+      sitSlider.removeAttribute('disabled');
+      togglePlank();
+    } else if (sitSel.value == "Exempt") {
+      sitSlider.disabled = true;
+    }
+    setScoreArrays();
+    changeTxtboxes(sittxt, sitSlider);
+    updateScoreMinMaxText();
+});
+
 
 function ageSexChange() {
   minMaxValueAge();

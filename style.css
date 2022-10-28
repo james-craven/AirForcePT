@@ -154,8 +154,6 @@ section {
     display: grid;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
 }
 
 .pushsit-see-chart-btn a {
@@ -210,8 +208,19 @@ section {
 
 .pushsit-see-chart-btn {
     display: grid;
-    align-items: left;
+    align-items: center;
     justify-content: left;
+}
+
+.plank-see-chart-btn, .plank-see-chart-btn button {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.plank-see-chart-btn button {
+    width: 100px!important;
+    transition: width 2s;
 }
 
 .sit-sel {
@@ -267,6 +276,13 @@ section {
     justify-content: center;
     align-items: center;
     grid-column-gap: 5px;
+}
+
+.sit-sel-chart-plank {
+    grid-template-columns: 1fr 1fr 40px 5px 40px!important;
+    justify-content: center!important;
+    align-items: center!important;
+    grid-column-gap: 5px!important;
 }
 
 .cardio-sel-div {
