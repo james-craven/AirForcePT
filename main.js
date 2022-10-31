@@ -3819,4 +3819,3 @@ sitSlider.addEventListener('input', () => {
     sitscore = calculateSitupsScore(sitSlider.value, scoreArrays);
     sittxt_p.innerHTML = "Abs Score: " + sitscore + " | Min: " + sitmin + " | Max: " + sitmax;
 })
-
