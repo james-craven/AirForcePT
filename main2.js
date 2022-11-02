@@ -19,6 +19,7 @@ const runSel = document.getElementById('cardio-sel');
 const absSeeChartBtn = document.getElementById('abs-see-chart-btn');
 const sitSection = document.getElementById('sit-sel-chart-section');
 const plankmintxt = document.getElementById('plankmintxt');
+const totalScoreParagraph = document.getElementById('score-txt');
 
 let runmin;
 let runmax;
@@ -2857,7 +2858,7 @@ var walkScores30To39Female = {"max": "17:28"};
 var walkScores40To49Female = {"max": "17:49"};
 var walkScores50To59Female = {"max": "18:11"};
 var walkScoresGreaterThan60Female = {"max": "18:53"};
-  
+
   
   
   
@@ -3448,7 +3449,7 @@ function minMaxValueAge() {
           (walkmax = t("16:40")),
           (strengthAbsLink = "./web formatted jpgs/male_55-59_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/male_55-59_cardio.webp"))
-        : "Male >60" == e
+        : "Male 60+" == e
         ? ((pushmin = 11),
           (pushmax = 30),
           (sitmin = 19),
@@ -3610,7 +3611,7 @@ function minMaxValueAge() {
           (walkmax = t("18:11")),
           (strengthAbsLink = "./web formatted jpgs/female_55-59_Strength_Abs.webp"),
           (cardioLink = "./web formatted jpgs/female_55-59_cardio.webp"))
-        : "Female >60" == e &&
+        : "Female 60+" == e &&
           ((pushmin = 4),
           (pushmax = 21),
           (sitmin = 8),
@@ -3646,6 +3647,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = maleLessThan25PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = maleLessThan25RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = maleLessThan25ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresLessThan30Male}
   } else if(age == 'Male 25-29') {
     if (push=="Pushups") {scoreArrays.strength = male25To29PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male25To29SitupScores;}
@@ -3654,6 +3656,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male25To29PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male25To29RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male25To29ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresLessThan30Male}
   } else if(age == 'Male 30-34') {
     if (push=="Pushups") {scoreArrays.strength = male30To34PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male30To34SitupScores;}
@@ -3662,6 +3665,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male30To34PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male30To34RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male30To34ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores30To39Male}
   } else if(age == 'Male 35-39') {
     if (push=="Pushups") {scoreArrays.strength = male35To39PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male35To39SitupScores;}
@@ -3670,6 +3674,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male35To39PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male35To39RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male35To39ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores30To39Male}
   } else if(age == 'Male 40-44') {
     if (push=="Pushups") {scoreArrays.strength = male40To44PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male40To44SitupScores;}
@@ -3678,6 +3683,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male40To44PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male40To44RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male40To44ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores40To49Male}
   } else if(age == 'Male 45-49') {
     if (push=="Pushups") {scoreArrays.strength = male45To49PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male45To49SitupScores;}
@@ -3686,6 +3692,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male45To49PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male45To49RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male45To49ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores40To49Male}
   } else if(age == 'Male 50-54') {
     if (push=="Pushups") {scoreArrays.strength = male50To54PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male50To54SitupScores;}
@@ -3694,6 +3701,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male50To54PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male50To54RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male50To54ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores50To59Male}
   } else if(age == 'Male 55-59') {
     if (push=="Pushups") {scoreArrays.strength = male55To59PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = male55To59SitupScores;}
@@ -3702,7 +3710,8 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = male55To59PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = male55To59RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = male55To59ShuttleScores}
-  } else if(age == 'Male > 60') {
+    if (run=="Walk") {scoreArrays.cardio = walkScores50To59Male}
+  } else if(age == 'Male 60+') {
     if (push=="Pushups") {scoreArrays.strength = maleGreaterThan60PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = maleGreaterThan60SitupScores;}
     if (run=="1.5 Mile") {scoreArrays.cardio = maleGreaterThan60RunScores;}
@@ -3710,6 +3719,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = maleGreaterThan60PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = maleGreaterThan60RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = maleGreaterThan60ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresGreaterThan60Male}
   } else if(age == 'Female < 25') {
     if (push=="Pushups") {scoreArrays.strength = femaleLessThan25PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = femaleLessThan25SitupScores;}
@@ -3718,6 +3728,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = femaleLessThan25PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = femaleLessThan25RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = femaleLessThan25ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresLessThan30Female}
   } else if(age == 'Female 25-29') {
     if (push=="Pushups") {scoreArrays.strength = female25To29PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female25To29SitupScores;}
@@ -3726,6 +3737,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female25To29PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female25To29RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female25To29ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresLessThan30Female}
   } else if(age == 'Female 30-34') {
     if (push=="Pushups") {scoreArrays.strength = female30To34PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female30To34SitupScores;}
@@ -3734,6 +3746,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female30To34PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female30To34RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female30To34ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores30To39Female}
   } else if(age == 'Female 35-39') {
     if (push=="Pushups") {scoreArrays.strength = female35To39PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female35To39SitupScores;}
@@ -3742,6 +3755,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female35To39PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female35To39RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female35To39ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores30To39Female}
   } else if(age == 'Female 40-44') {
     if (push=="Pushups") {scoreArrays.strength = female40To44PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female40To44SitupScores;}
@@ -3750,6 +3764,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female40To44PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female40To44RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female40To44ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores40To49Female}
   } else if(age == 'Female 45-49') {
     if (push=="Pushups") {scoreArrays.strength = female45To49PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female45To49SitupScores;}
@@ -3758,6 +3773,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female45To49PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female45To49RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female45To49ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores40To49Female}
   } else if(age == 'Female 50-54') {
     if (push=="Pushups") {scoreArrays.strength = female50To54PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female50To54SitupScores;}
@@ -3766,6 +3782,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female50To54PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female50To54RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female50To54ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScores50To59Female}
   } else if(age == 'Female 55-59') {
     if (push=="Pushups") {scoreArrays.strength = female55To59PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = female55To59SitupScores;}
@@ -3774,7 +3791,8 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = female55To59PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = female55To59RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = female55To59ShuttleScores}
-  } else if(age == 'Female > 60') {
+    if (run=="Walk") {scoreArrays.cardio = walkScores50To59Female}
+  } else if(age == 'Female 60+') {
     if (push=="Pushups") {scoreArrays.strength = femaleGreaterThan60PushupScores;}
     if (sit=="Situps") {scoreArrays.abs = femaleGreaterThan60SitupScores;}
     if (run=="1.5 Mile") {scoreArrays.cardio = femaleGreaterThan60RunScores;}
@@ -3782,6 +3800,7 @@ function setScoreArrays() {
     if (sit=="Plank") {scoreArrays.abs = femaleGreaterThan60PlankScores}
     if (sit=="Reverse Crunch") {scoreArrays.abs = femaleGreaterThan60RSitupScores}
     if (run=="Shuttle Run") {scoreArrays.cardio = femaleGreaterThan60ShuttleScores}
+    if (run=="Walk") {scoreArrays.cardio = walkScoresGreaterThan60Female}
   }
 }
 setScoreArrays();
@@ -3837,9 +3856,11 @@ function changeTxtboxes(txt1, txt2, slider) {
         let runtime = runTime(slider.value);
         txt1.value = (runtime.minutes < 10 ? '0' + runtime.minutes : runtime.minutes).toString();
         txt2.value = (runtime.sec < 10 ? '0' + runtime.sec : runtime.sec).toString();
+        console.log('two boxes');
     } else {
         let slider = txt2;
         txt1.value = slider.value;
+        console.log('one box');
     }
 }
 
@@ -3857,7 +3878,7 @@ function calculateShuttleScore(e, n) {
   let r; 
   for (let s = 0; s < n.cardio.length; s++) { 
     if (r = n.cardio[s], 0 == s) { 
-      if (e >= r.range.slice(1)) 
+      if (Number(e) >= r.range.slice(1)) 
       return r.points 
     } 
     let a = r.range.split(" - ")[0], o = r.range.split(" - ")[1]; 
@@ -3871,11 +3892,12 @@ function calculateStrengthScore(e, n) { let r = e.toString(); return isNaN(n.str
     
 function calculateSitupsScore(e, n) { let r = e.toString(); return isNaN(n.abs[r]) ? 0 : n.abs[r] } 
     
-function didWalkPass(e, n) { return e <= hms(n.cardio.max) }
+function didWalkPass(e, n) { return (e <= hms(n.cardio.max)) ? "Pass" : "Fail" }
 
 function calculatePlankScore(e, n) { for (key in n.abs) if (e >= hms(key)) return n.abs[key]; return 0 }
 
 function updateScoreMinMaxText() {
+  let push_sel = pushSel.value;
   let min = pushSel.value == 'Pushups' ? pushmin : pushSel.value == 'Hand-Release' ? hrmin : '';
   let max = pushSel.value == 'Pushups' ? pushmax : pushSel.value == 'Hand-Release' ? hrmax : '';
   pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
@@ -3885,31 +3907,48 @@ function updateScoreMinMaxText() {
   let sit_min = sit_sel == 'Situps' ? sitmin : sit_sel == 'Reverse Crunch' ? rsitmin : sit_sel == 'Plank' ? runTimeString(plankmin) : '';
   let sit_max = sit_sel == 'Situps' ? sitmax : sit_sel == 'Reverse Crunch' ? rsitmax : sit_sel == 'Plank' ? runTimeString(plankmax) : '';
   sitscore = sit_sel == 'Plank' ? calculatePlankScore(sitSlider.value, scoreArrays) : calculateSitupsScore(sitSlider.value, scoreArrays);
-  console.log(sitscore);
   sittxt_p.innerHTML = sitSel.value == 'Exempt' ? "Abs Score: EXEMPT" : "Abs Score: " + sitscore + " | Min: " + sit_min + " | Max: " + sit_max;
 
   let run_sel = runSel.value;
   let run_min = run_sel == '1.5 Mile' ? runTimeString(runmin) : run_sel == 'Shuttle Run' ? shuttlemin : run_sel == 'Walk' ? '' : '';
-  let run_max = run_sel == '1.5 Mile' ? runTimeString(runmax) : run_sel == 'Shuttle Run' ? shuttlemax : run_sel == 'Walk' ? walkmax : '';
-    runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(runSlider.value, scoreArrays) : run_sel == 'Walk' ? didWalkPass(runSlider.value, scoreArrays) : '';
-    console.log(typeof(runSlider.value) + " : " + calculateShuttleScore(runSlider.value, scoreArrays));
-    runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_min + " | Max: " + run_max;
+  let run_max = run_sel == '1.5 Mile' ? runTimeString(runmax) : run_sel == 'Shuttle Run' ? shuttlemax : run_sel == 'Walk' ? runTimeString(walkmax) : '';
+  runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(runSlider.value, scoreArrays) : run_sel == 'Walk' ? didWalkPass(runSlider.value, scoreArrays) : '';
+  runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_min + " | Max: " + run_max;
+
+  runscore = typeof(runscore) == 'number' ? runscore : runscore == 'Pass' ? 60 : 0;
+  let t = pushscore + sitscore + runscore;
+  let e = 'Exempt';
+  let p = push_sel,
+      s = sit_sel,
+      r = run_sel;
+  /*Pushups Exempt*/
+  p == e && s != e && r != e ? t = ((sitscore + runscore) / 80) * 100 :
+  /*Situps Exempt*/
+  p =! e && s == e && r != e ? t = ((pushscore + runscore) / 80) * 100 :
+  /*Run Exempt*/
+  p != e && s != e && r == e ? t = ((sitscore + pushscore) / 40) * 100 :
+  /*Pushups and Situps Exempt*/
+  p == e && s == e && r != e ? t = ((runscore) / 60) * 100 :
+  /*Situps and Run Exempt*/
+  p != e && s == e && r == e ? t = ((pushscore) / 20) * 100 :
+  /*Pushups and Run Exempt*/
+  p == e && s != e && r == e ? t = ((sitscore) / 20) * 100 : 'Exempt';
+
+
+  let fail_pass_text = pushscore == 0 && p != e || sitscore == 0 && s != e || runscore == 0 && r != e ? 
+  "FAIL! Minimum Not Met!" : t < 75 ? "Unsatisfactory!" : t < 90 ? "Satisfactory!" : "Excellent!";
+
+  totalScoreParagraph.innerHTML = `Total Score: <span id="t">${t.toFixed(1)}<br>
+                                    ${fail_pass_text}</span>`
+  document.getElementById('t').style.color = fail_pass_text == "FAIL! Minimum Not Met!" || 
+                                             fail_pass_text == "Unsatisfactory!" ? 'red' : 'lightgreen';
 }
 updateScoreMinMaxText();
-
-function updateSliderValues() {
-  runSlider.min = runmin;
-  runSlider.max = runmax;
-  pushSlider.min = 0;
-  pushSlider.max = pushmax;
-  sitSlider.min = 0;
-  sitSlider.max = sitmax;
-}
-updateSliderValues();
 
 function runSlideInput() {
   changeLapTime();
   updateScoreMinMaxText();
+  runSel.value == 'Shuttle Run' ? changeTxtboxes(sectxt, runSlider) :
   changeTxtboxes(mintxt, sectxt, runSlider);
 }
 runSlider.addEventListener('input', runSlideInput);
@@ -3926,7 +3965,7 @@ function sitSlideInput() {
 }
 sitSlider.addEventListener('input', sitSlideInput);
 
-pushSel.addEventListener('change', () => {
+function pushSelChange() {
   if (pushSel.value == "Pushups") {
     pushSlider.max = pushmax;
     pushSlider.removeAttribute('disabled');
@@ -3939,7 +3978,9 @@ pushSel.addEventListener('change', () => {
   setScoreArrays();
   changeTxtboxes(pushtxt, pushSlider);
   updateScoreMinMaxText();
-});
+}
+pushSelChange();
+pushSel.addEventListener('change', pushSelChange);
 
 function togglePlank() {
   if (sitSel.value != 'Plank') {
@@ -3957,25 +3998,27 @@ function togglePlank() {
   }
 }
 
-sitSel.addEventListener('change', () => {
+function sitSelChange() {
   if (sitSel.value == "Situps") {
-      sitSlider.max = sitmax;
-      togglePlank();
-      sitSlider.removeAttribute('disabled');
-    } else if (sitSel.value == "Reverse Crunch") {
-      sitSlider.max = rsitmax;
-      togglePlank();
-      sitSlider.removeAttribute('disabled');
-    } else if (sitSel.value == 'Plank') {
-      sitSlider.max = plankmax;
-      sitSlider.removeAttribute('disabled');
-      togglePlank();
-    } else if (sitSel.value == "Exempt") {
-      sitSlider.disabled = true;
-    }
-    setScoreArrays();
-    updateScoreMinMaxText();
-});
+    sitSlider.max = sitmax;
+    togglePlank();
+    sitSlider.removeAttribute('disabled');
+  } else if (sitSel.value == "Reverse Crunch") {
+    sitSlider.max = rsitmax;
+    togglePlank();
+    sitSlider.removeAttribute('disabled');
+  } else if (sitSel.value == 'Plank') {
+    sitSlider.max = plankmax;
+    sitSlider.removeAttribute('disabled');
+    togglePlank();
+  } else if (sitSel.value == "Exempt") {
+    sitSlider.disabled = true;
+  }
+  setScoreArrays();
+  updateScoreMinMaxText();
+}
+sitSelChange();
+sitSel.addEventListener('change', sitSelChange);
 
 function toggleShuttle() {
   let section = document.getElementById('cardio-sel-chart');
@@ -3990,6 +4033,7 @@ function toggleShuttle() {
     section.classList.remove('cardio-sel-chart');
     cardioBtn.classList.remove('cardio-see-chart-btn');
     cardioBtn.classList.add('pushsit-see-chart-btn');
+    changeTxtboxes(sectxt, runSlider);
   } else {
     runSlider.classList.remove('shuttle-slider');
     runSlider.classList.add('run-slider');
@@ -3999,33 +4043,45 @@ function toggleShuttle() {
     section.classList.add('cardio-sel-chart');
     cardioBtn.classList.add('cardio-see-chart-btn');
     cardioBtn.classList.remove('pushsit-see-chart-btn');
+    changeTxtboxes(mintxt, sectxt, runSlider);
   }
 
 }
 
-runSel.addEventListener('change', () => {
+function runSelChange() {
   if (runSel.value == '1.5 Mile') {
     runSlider.max = runmax;
     runSlider.classList.add('run-slider');
     runSlider.classList.remove('shuttle-slider');
     runSlider.value = runmax;
     toggleShuttle();
+    runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Shuttle Run') {
     runSlider.max = shuttlemax;
     runSlider.min = 0;
     runSlider.value = 0;
     toggleShuttle();
+    runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Walk') {
-    runSlider.max = walkmax;
+    runSlider.max = runmax;
+    runSlider.value = runmax;
+    toggleShuttle();
+    runSlider.removeAttribute('disabled');
+  } else if (runSel.value == 'Exempt') {
+    runSlider.disabled = true;
   }
   setScoreArrays();
   updateScoreMinMaxText();
-})
+}
+runSelChange();
+runSel.addEventListener('change', runSelChange);
 
 function ageSexChange() {
   minMaxValueAge();
   setScoreArrays();
-  updateSliderValues();
+  pushSelChange();
+  sitSelChange();
+  runSelChange();
   updateScoreMinMaxText();
   changeAllTxtboxes();
   changeLapTime();
