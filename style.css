@@ -65,8 +65,13 @@ section {
 }
 
 .score-txt-red {
-    color: rgb(224, 0, 0);
-    
+    color: rgb(220, 0, 0);
+    text-shadow: -1px -1px 0 rgb(0, 0, 0), 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
+}
+
+.score-txt-green {
+    color: #90ee90;
+    text-shadow: -1px -1px 0 rgb(0, 0, 0), 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
 }
 
 /* Sextion 3 - Sex/Age Select */
@@ -548,4 +553,11 @@ input[type=range] {
   background-size: 30px 30px;
   overflow:visible;
   cursor: pointer;
+}
+
+.slider-green::-webkit-slider-thumb {
+    background-color:#90ee90;
+}
+.slider-red::-webkit-slider-thumb {
+    background-color: rgb(220, 0, 0);
 }

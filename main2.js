@@ -3902,18 +3902,31 @@ function updateScoreMinMaxText() {
   let max = pushSel.value == 'Pushups' ? pushmax : pushSel.value == 'Hand-Release' ? hrmax : '';
   pushscore = calculateStrengthScore(pushSlider.value, scoreArrays);
   pushtxt_p.innerHTML = pushSel.value == 'Exempt' ? "Strength Score: EXEMPT" : "Strength Score: " + pushscore + " | Min: " + min + " | Max: " + max;
-  
+  pushSlider.value >= min ? 
+  (pushSlider.classList.add('slider-green'),
+  pushSlider.classList.remove('slider-red')) : 
+  pushSlider.classList.add('slider-red');
+
   let sit_sel = sitSel.value;
   let sit_min = sit_sel == 'Situps' ? sitmin : sit_sel == 'Reverse Crunch' ? rsitmin : sit_sel == 'Plank' ? runTimeString(plankmin) : '';
   let sit_max = sit_sel == 'Situps' ? sitmax : sit_sel == 'Reverse Crunch' ? rsitmax : sit_sel == 'Plank' ? runTimeString(plankmax) : '';
   sitscore = sit_sel == 'Plank' ? calculatePlankScore(sitSlider.value, scoreArrays) : calculateSitupsScore(sitSlider.value, scoreArrays);
   sittxt_p.innerHTML = sitSel.value == 'Exempt' ? "Abs Score: EXEMPT" : "Abs Score: " + sitscore + " | Min: " + sit_min + " | Max: " + sit_max;
+  sitSlider.value >= sit_min ? 
+  (sitSlider.classList.add('slider-green'),
+  sitSlider.classList.remove('slider-red')) : 
+  sitSlider.classList.add('slider-red');
+
 
   let run_sel = runSel.value;
   let run_min = run_sel == '1.5 Mile' ? runTimeString(runmin) : run_sel == 'Shuttle Run' ? shuttlemin : run_sel == 'Walk' ? '' : '';
   let run_max = run_sel == '1.5 Mile' ? runTimeString(runmax) : run_sel == 'Shuttle Run' ? shuttlemax : run_sel == 'Walk' ? runTimeString(walkmax) : '';
   runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(runSlider.value, scoreArrays) : run_sel == 'Walk' ? didWalkPass(runSlider.value, scoreArrays) : '';
   runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_min + " | Max: " + run_max;
+  runSlider.value >= run_min ? 
+  (runSlider.classList.add('slider-green'),
+  runSlider.classList.remove('slider-red')) : 
+  runSlider.classList.add('slider-red');
 
   runscore = typeof(runscore) == 'number' ? runscore : runscore == 'Pass' ? 60 : 0;
   let t = pushscore + sitscore + runscore;
@@ -3940,8 +3953,14 @@ function updateScoreMinMaxText() {
 
   totalScoreParagraph.innerHTML = `Total Score: <span id="t">${t.toFixed(1)}<br>
                                     ${fail_pass_text}</span>`
-  document.getElementById('t').style.color = fail_pass_text == "FAIL! Minimum Not Met!" || 
-                                             fail_pass_text == "Unsatisfactory!" ? 'red' : 'lightgreen';
+  let t_text = document.getElementById('t');
+  if (fail_pass_text == "FAIL! Minimum Not Met!" || fail_pass_text == "Unsatisfactory!") {
+    t_text.classList.add('score-txt-red');
+    t_text.classList.remove('score-txt-green');
+  } else {
+    t_text.classList.add('score-txt-green');
+    t_text.classList.remove('score-txt-red');
+  }
 }
 updateScoreMinMaxText();
 
