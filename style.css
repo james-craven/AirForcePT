@@ -65,7 +65,7 @@ section {
 }
 
 .score-txt-red {
-    color: rgb(220, 0, 0);
+    color: rgb(255, 44, 44);
     text-shadow: -1px -1px 0 rgb(0, 0, 0), 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
 }
 
@@ -355,7 +355,7 @@ section {
 
 
 
-input[type=text] {
+input[type=tel] {
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     cursor: pointer;
@@ -559,5 +559,5 @@ input[type=range] {
     background-color:#90ee90;
 }
 .slider-red::-webkit-slider-thumb {
-    background-color: rgb(220, 0, 0);
+    background-color: rgb(255, 0, 0);
 }

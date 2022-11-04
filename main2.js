@@ -3847,7 +3847,8 @@ function changeLapTime() {
         let u = runTime(Math.floor(runSlider.value / 6) * (i + 1));
         text += "<br>Lap " + (i + 1) + ": ≤ " + u.minutes + ":" + (u.sec.toFixed(0) < 10 ? '0'+u.sec.toFixed(0) : u.sec.toFixed(0));
     };
-    lapTimeP.innerHTML = text;
+    lapTimeP.innerHTML = runSel.value == '1.5 Mile' ? text : `Shuttle Level: ${shuttleLevel()}<br>
+    Current Level Shuttles: ${currentShuttles()}`
 };
 changeLapTime();
 
@@ -3896,6 +3897,53 @@ function didWalkPass(e, n) { return (e <= hms(n.cardio.max)) ? "Pass" : "Fail" }
 
 function calculatePlankScore(e, n) { for (key in n.abs) if (e >= hms(key)) return n.abs[key]; return 0 }
 
+function shuttleLevel() {
+  let t = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+            e = 5;
+        return (
+            runSlider.value >= 93
+                ? (e = t[0])
+                : runSlider.value >= 82 && runSlider.value < 93
+                ? (e = t[1])
+                : runSlider.value >= 71 && runSlider.value < 82
+                ? (e = t[2])
+                : runSlider.value >= 61 && runSlider.value < 71
+                ? (e = t[3])
+                : runSlider.value >= 51 && runSlider.value < 61
+                ? (e = t[4])
+                : runSlider.value >= 42 && runSlider.value < 51
+                ? (e = t[5])
+                : runSlider.value >= 33 && runSlider.value < 42
+                ? (e = t[6])
+                : runSlider.value >= 24 && runSlider.value < 33
+                ? (e = t[7])
+                : runSlider.value >= 16 && runSlider.value < 24
+                ? (e = t[8])
+                : runSlider.value >= 8 && runSlider.value < 16 && (e = t[9]),
+            runSlider.value >= 0 && runSlider.value < 8 && (e = t[10]),
+            e
+        )
+}
+
+function currentShuttles() {
+  var t = 1,
+      e = [7, 15, 23, 32, 41, 50, 60, 70, 81, 92, 104];
+  return (
+      1 == shuttleLevel() && (t = runSlider.value - e[0] + 7),
+      2 == shuttleLevel() && (t = runSlider.value - e[1] + 8),
+      3 == shuttleLevel() && (t = runSlider.value - e[2] + 8),
+      4 == shuttleLevel() && (t = runSlider.value - e[3] + 9),
+      5 == shuttleLevel() && (t = runSlider.value - e[4] + 9),
+      6 == shuttleLevel() && (t = runSlider.value - e[5] + 9),
+      7 == shuttleLevel() && (t = runSlider.value - e[6] + 10),
+      8 == shuttleLevel() && (t = runSlider.value - e[7] + 10),
+      9 == shuttleLevel() && (t = runSlider.value - e[8] + 11),
+      10 == shuttleLevel() && (t = runSlider.value - e[9] + 11),
+      11 == shuttleLevel() && (t = runSlider.value - e[10] + 12),
+      t
+  );
+}
+
 function updateScoreMinMaxText() {
   let push_sel = pushSel.value;
   let min = pushSel.value == 'Pushups' ? pushmin : pushSel.value == 'Hand-Release' ? hrmin : '';
@@ -3923,10 +3971,19 @@ function updateScoreMinMaxText() {
   let run_max = run_sel == '1.5 Mile' ? runTimeString(runmax) : run_sel == 'Shuttle Run' ? shuttlemax : run_sel == 'Walk' ? runTimeString(walkmax) : '';
   runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(runSlider.value, scoreArrays) : run_sel == 'Walk' ? didWalkPass(runSlider.value, scoreArrays) : '';
   runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_min + " | Max: " + run_max;
-  runSlider.value >= run_min ? 
-  (runSlider.classList.add('slider-green'),
-  runSlider.classList.remove('slider-red')) : 
-  runSlider.classList.add('slider-red');
+  if (run_sel == '1.5 Mile') {
+    runSlider.value <= runmax ? 
+    (runSlider.classList.add('slider-green'),
+    runSlider.classList.remove('slider-red')) : 
+    (runSlider.classList.add('slider-red'),
+    runSlider.classList.remove('slider-green'));
+  } else {
+    runSlider.value >= run_min ? 
+    (runSlider.classList.add('slider-green'),
+    runSlider.classList.remove('slider-red')) : 
+    (runSlider.classList.add('slider-red'),
+    runSlider.classList.remove('slider-green'));
+  }
 
   runscore = typeof(runscore) == 'number' ? runscore : runscore == 'Pass' ? 60 : 0;
   let t = pushscore + sitscore + runscore;
@@ -3935,9 +3992,9 @@ function updateScoreMinMaxText() {
       s = sit_sel,
       r = run_sel;
   /*Pushups Exempt*/
-  p == e && s != e && r != e ? t = ((sitscore + runscore) / 80) * 100 :
+  (p == e && s != e && r != e) ? t = ((sitscore + runscore) / 80) * 100 :
   /*Situps Exempt*/
-  p =! e && s == e && r != e ? t = ((pushscore + runscore) / 80) * 100 :
+  p != e && s == e && r != e ? t = ((pushscore + runscore) / 80) * 100 :
   /*Run Exempt*/
   p != e && s != e && r == e ? t = ((sitscore + pushscore) / 40) * 100 :
   /*Pushups and Situps Exempt*/
@@ -3948,11 +4005,11 @@ function updateScoreMinMaxText() {
   p == e && s != e && r == e ? t = ((sitscore) / 20) * 100 : 'Exempt';
 
 
-  let fail_pass_text = pushscore == 0 && p != e || sitscore == 0 && s != e || runscore == 0 && r != e ? 
+  let fail_pass_text = (pushscore == 0 && p != e) || (sitscore == 0 && s != e) || (runscore == 0 && r != e) ? 
   "FAIL! Minimum Not Met!" : t < 75 ? "Unsatisfactory!" : t < 90 ? "Satisfactory!" : "Excellent!";
 
   totalScoreParagraph.innerHTML = `Total Score: <span id="t">${t.toFixed(1)}<br>
-                                    ${fail_pass_text}</span>`
+                                    ${fail_pass_text}</span>`;
   let t_text = document.getElementById('t');
   if (fail_pass_text == "FAIL! Minimum Not Met!" || fail_pass_text == "Unsatisfactory!") {
     t_text.classList.add('score-txt-red');
@@ -3965,10 +4022,14 @@ function updateScoreMinMaxText() {
 updateScoreMinMaxText();
 
 function runSlideInput() {
-  changeLapTime();
+  if (runSel.value == 'Shuttle Run') {
+    changeTxtboxes(sectxt, runSlider);
+    changeLapTime();
+  } else {
+    changeTxtboxes(mintxt, sectxt, runSlider);
+    changeLapTime();
+  }
   updateScoreMinMaxText();
-  runSel.value == 'Shuttle Run' ? changeTxtboxes(sectxt, runSlider) :
-  changeTxtboxes(mintxt, sectxt, runSlider);
 }
 runSlider.addEventListener('input', runSlideInput);
 
@@ -4074,17 +4135,20 @@ function runSelChange() {
     runSlider.classList.remove('shuttle-slider');
     runSlider.value = runmax;
     toggleShuttle();
+    changeLapTime();
     runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Shuttle Run') {
     runSlider.max = shuttlemax;
     runSlider.min = 0;
     runSlider.value = 0;
     toggleShuttle();
+    changeLapTime();
     runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Walk') {
     runSlider.max = runmax;
     runSlider.value = runmax;
     toggleShuttle();
+    changeLapTime();
     runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Exempt') {
     runSlider.disabled = true;
@@ -4107,3 +4171,32 @@ function ageSexChange() {
 }
 ageSel.addEventListener('change', ageSexChange);
 sexSel.addEventListener('change', ageSexChange);
+
+pushtxt.addEventListener('click', () => {
+  pushtxt.value = "";
+})
+
+pushtxt.addEventListener('input', (e) => {
+    pushSlider.value = pushtxt.value;
+    updateScoreMinMaxText();
+  }
+)
+
+pushtxt.addEventListener('focus', () => {
+  pushtxt.addEventListener('keydown', (e) => {
+    let regex = /^[A-Za-z]$/;
+    if (e.key.match(regex)) {
+      alert('Please Input Numbers Only');
+      e.preventDefault();
+    }
+    if (e.keyCode == '38') {
+      pushtxt.value = Number(pushtxt.value) + Number(1);
+      pushSlider.value = pushtxt.value;
+      updateScoreMinMaxText();
+    } else if (e.keyCode == '40') {
+      pushtxt.value = Number(pushtxt.value) - Number(1);
+      pushSlider.value = pushtxt.value;
+      updateScoreMinMaxText();
+    }
+  })
+})
