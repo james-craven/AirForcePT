@@ -3847,7 +3847,7 @@ function changeLapTime() {
         let u = runTime(Math.floor(runSlider.value / 6) * (i + 1));
         text += "<br>Lap " + (i + 1) + ": ≤ " + u.minutes + ":" + (u.sec.toFixed(0) < 10 ? '0'+u.sec.toFixed(0) : u.sec.toFixed(0));
     };
-    lapTimeP.innerHTML = runSel.value == '1.5 Mile' ? text : `Shuttle Level: ${shuttleLevel()}<br>
+    lapTimeP.innerHTML = runSel.value == '1.5 Mile' || runSel.value == 'Walk' ? text : `Shuttle Level: ${shuttleLevel()}<br>
     Current Level Shuttles: ${currentShuttles()}`
 };
 changeLapTime();
@@ -3857,11 +3857,9 @@ function changeTxtboxes(txt1, txt2, slider) {
         let runtime = runTime(slider.value);
         txt1.value = (runtime.minutes < 10 ? '0' + runtime.minutes : runtime.minutes).toString();
         txt2.value = (runtime.sec < 10 ? '0' + runtime.sec : runtime.sec).toString();
-        console.log('two boxes');
     } else {
         let slider = txt2;
         txt1.value = slider.value;
-        console.log('one box');
     }
 }
 
@@ -4021,6 +4019,12 @@ function updateScoreMinMaxText() {
 }
 updateScoreMinMaxText();
 
+function txtboxToSliderValue(txtbox1, slider, txtbox2) {
+  let txt1 = txtbox1.value == '' ? 0 : Number(txtbox1.value);
+  let txt2 = txtbox2.value == '' ? 0 : Number(txtbox2.value);
+  slider.value = (txt1 * 60) + txt2;
+}
+
 function runSlideInput() {
   if (runSel.value == 'Shuttle Run') {
     changeTxtboxes(sectxt, runSlider);
@@ -4083,14 +4087,20 @@ function sitSelChange() {
     sitSlider.max = sitmax;
     togglePlank();
     sitSlider.removeAttribute('disabled');
+    removeTxtboxEventListeners(sittxt, sitSlider, plankmintxt);
+    addTxtboxEventListeners(sittxt, sitSlider);
   } else if (sitSel.value == "Reverse Crunch") {
     sitSlider.max = rsitmax;
     togglePlank();
     sitSlider.removeAttribute('disabled');
+    removeTxtboxEventListeners(sittxt, sitSlider, plankmintxt);
+    addTxtboxEventListeners(sittxt, sitSlider);
   } else if (sitSel.value == 'Plank') {
     sitSlider.max = plankmax;
     sitSlider.removeAttribute('disabled');
     togglePlank();
+    removeTxtboxEventListeners(sittxt, sitSlider);
+    addTxtboxEventListeners(sittxt, sitSlider, plankmintxt);
   } else if (sitSel.value == "Exempt") {
     sitSlider.disabled = true;
   }
@@ -4137,12 +4147,17 @@ function runSelChange() {
     toggleShuttle();
     changeLapTime();
     runSlider.removeAttribute('disabled');
+    runSlider.min = runmin;
+    removeTxtboxEventListeners(sectxt, runSlider);
+    addTxtboxEventListeners(mintxt, runSlider, sectxt);
   } else if (runSel.value == 'Shuttle Run') {
     runSlider.max = shuttlemax;
     runSlider.min = 0;
     runSlider.value = 0;
     toggleShuttle();
     changeLapTime();
+    removeTxtboxEventListeners(mintxt, runSlider, sectxt);
+    addTxtboxEventListeners(sectxt, runSlider);
     runSlider.removeAttribute('disabled');
   } else if (runSel.value == 'Walk') {
     runSlider.max = runmax;
@@ -4150,6 +4165,8 @@ function runSelChange() {
     toggleShuttle();
     changeLapTime();
     runSlider.removeAttribute('disabled');
+    removeTxtboxEventListeners(sectxt, runSlider);
+    addTxtboxEventListeners(mintxt, runSlider, sectxt);
   } else if (runSel.value == 'Exempt') {
     runSlider.disabled = true;
   }
@@ -4172,31 +4189,157 @@ function ageSexChange() {
 ageSel.addEventListener('change', ageSexChange);
 sexSel.addEventListener('change', ageSexChange);
 
-pushtxt.addEventListener('click', () => {
-  pushtxt.value = "";
-})
+function oneTxtboxInput() {
+  this.value == '' ? this.slider.value = 0 :
+  this.slider.value = this.value;
+  updateScoreMinMaxText();
+}
 
-pushtxt.addEventListener('input', (e) => {
-    pushSlider.value = pushtxt.value;
+function oneTxtboxKeydown(e) {
+  let regex = /^[A-Za-z\-]$/;
+  if (e.key.match(regex)) {
+    alert('Please Input Numbers Only');
+    e.preventDefault();
+  }
+  console.log(e);
+  if (Number(this.value) + Number(e.key) > Number(this.slider.max) ||
+      this.value < 0) return (e.preventDefault(), this.value = 0);
+  if (e.keyCode == '38') {
+    if (Number(this.value) + Number(1) > Number(this.slider.max) ||
+    this.value < 0) return e.preventDefault();
+    this.value = Number(this.value) + Number(1);
+    this.slider.value = this.value;
+    updateScoreMinMaxText();
+  } else if (e.keyCode == '40') {
+    if (Number(this.value) - Number(1) < 0) return e.preventDefault();
+    this.value = Number(this.value) - Number(1);
+    this.slider.value = this.value;
     updateScoreMinMaxText();
   }
-)
+}
 
-pushtxt.addEventListener('focus', () => {
-  pushtxt.addEventListener('keydown', (e) => {
-    let regex = /^[A-Za-z]$/;
-    if (e.key.match(regex)) {
-      alert('Please Input Numbers Only');
-      e.preventDefault();
+function oneTxtboxBlur() {
+  if (this.value == '') {
+    this.slider.value = 0;
+    this.value = 0;
+    updateScoreMinMaxText();
+  }
+}
+
+function oneTxtboxFocus() {
+  if (this.value == 0) {
+    this.value = '';
+  }
+}
+
+function twoTxtbox1Input() {
+  txtboxToSliderValue(this, this.slider, this.textbox2);
+  updateScoreMinMaxText();
+}
+
+function twoTxtbox2Input() {
+  txtboxToSliderValue(this.textbox1, this.slider, this);
+  updateScoreMinMaxText();
+}
+
+function twoTxtboxKeydown1(e) {
+  let regex = /^[A-Za-z]$/;
+  if (e.key.match(regex)) {
+    alert('Please Input Numbers Only');
+    e.preventDefault();
+  }
+  if (e.keyCode == '38') {
+    this.value = Number(this.value) + Number(1);
+    txtboxToSliderValue(this, this.slider, this.textbox2);
+    updateScoreMinMaxText();
+  } else if (e.keyCode == '40') {
+    this.value = Number(this.value) - Number(1);
+    txtboxToSliderValue(this, this.slider, this.textbox2);
+    updateScoreMinMaxText();
+  }
+}
+
+function twoTxtboxKeydown2(e) {
+  let regex = /^[A-Za-z\-]$/;
+        if (e.key.match(regex)) {
+          alert('Please Input Numbers Only');
+          e.preventDefault();
+        }
+        if (e.keyCode == '38') {
+          if (this.value < 59) {
+            this.value = this.value < 9 ? '0' + (Number(this.value) + Number(1)) : Number(this.value) + Number(1);
+          } else {
+            this.value = '0' + 0;
+            this.textbox1.value = Number(this.textbox1.value) + Number(1);
+          }
+          
+          txtboxToSliderValue(this.textbox1, this.slider, this);
+          updateScoreMinMaxText();
+        } else if (e.keyCode == '40') {
+          if (this.value < 1) {
+            this.value = this.value < 9 ? '0' + (Number(this.value) - Number(1)) : Number(this.value) - Number(1);
+            this.value = Number(59);
+            this.textbox1.value = Number(this.textbox1.value) - Number(1);
+          } else {
+            this.value = this.value < 9 ? '0' + (Number(this.value) - Number(1)) : Number(this.value) - Number(1);
+          }
+          txtboxToSliderValue(this.textbox1, this.slider, this);
+          updateScoreMinMaxText();
+        }
+}
+
+function addTxtboxEventListeners(textbox1, slider, textbox2) {
+
+    if (arguments.length == 2) {
+
+      textbox1.addEventListener('input', oneTxtboxInput);
+      textbox1.slider = slider;
+
+      textbox1.addEventListener('keydown', oneTxtboxKeydown);
+
+      textbox1.addEventListener('blur', oneTxtboxBlur);
+
+      textbox1.addEventListener('focus', oneTxtboxFocus);
+
+    } else if (arguments.length == 3) {
+  
+      textbox1.slider = slider;
+      textbox2.slider = slider;
+      textbox1.textbox2 = textbox2;
+      textbox2.textbox1 = textbox1;
+
+      textbox1.addEventListener('input', twoTxtbox1Input);
+      textbox2.addEventListener('input', twoTxtbox2Input);
+
+      textbox1.addEventListener('keydown', twoTxtboxKeydown1);
+      textbox2.addEventListener('keydown', twoTxtboxKeydown2);
     }
-    if (e.keyCode == '38') {
-      pushtxt.value = Number(pushtxt.value) + Number(1);
-      pushSlider.value = pushtxt.value;
-      updateScoreMinMaxText();
-    } else if (e.keyCode == '40') {
-      pushtxt.value = Number(pushtxt.value) - Number(1);
-      pushSlider.value = pushtxt.value;
-      updateScoreMinMaxText();
+}
+addTxtboxEventListeners(pushtxt, pushSlider);
+
+function removeTxtboxEventListeners(textbox1, slider, textbox2) {
+    if (arguments.length == 2) {
+
+      textbox1.removeEventListener('input', oneTxtboxInput);
+      textbox1.slider = slider;
+
+      textbox1.removeEventListener('keydown', oneTxtboxKeydown);
+
+      textbox1.removeEventListener('blur', oneTxtboxBlur);
+
+      textbox1.removeEventListener('focus', oneTxtboxFocus);
+
+    } else if (arguments.length == 3) {
+  
+      textbox1.slider = slider;
+      textbox2.slider = slider;
+      textbox1.textbox2 = textbox2;
+      textbox2.textbox1 = textbox1;
+
+      textbox1.removeEventListener('input', twoTxtbox1Input);
+      textbox2.removeEventListener('input', twoTxtbox2Input);
+
+      textbox1.removeEventListener('keydown', twoTxtboxKeydown1);
+      textbox2.removeEventListener('keydown', twoTxtboxKeydown2);
     }
-  })
-})
+}
