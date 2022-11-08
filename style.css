@@ -561,3 +561,12 @@ input[type=range] {
 .slider-red::-webkit-slider-thumb {
     background-color: rgb(255, 0, 0);
 }
+
+.runlaps-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.runlaps-row div {
+    margin: 1em;
+}
