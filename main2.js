@@ -4129,9 +4129,10 @@ function calculateAltitudeDiff() {
 
   //Run Diff
   let s = runSlider.value;
+  let b;
   // a is number of seconds added to total run time
   let a = "Group 1 (5250-5499ft)" == altitudeSel.value 
-    ? s <= hms("11:22") ? 2 : s <= hms("15:20")
+    ? (b=1,s <= hms("11:22")) ? 2 : s <= hms("15:20")
       ? 3
       : s <= hms("16:22")
         ? 4
@@ -4145,7 +4146,7 @@ function calculateAltitudeDiff() {
                 ? 8
                 : 0
     : "Group 2 (5500-5999ft)" == altitudeSel.value
-      ? s <= hms("9:34")
+      ? (b=2,s <= hms("9:34"))
         ? 6
         : s <= hms("10:37")
           ? 7
@@ -4177,7 +4178,7 @@ function calculateAltitudeDiff() {
                                     ? 22
                                     : 0
       : "Group 3 (6000-6599ft)" == altitudeSel.value
-        ? s <= hms("9:34")
+        ? (b=3,s <= hms("9:34"))
           ? 11
           : s <= hms("10:37")
             ? 12
@@ -4223,7 +4224,7 @@ function calculateAltitudeDiff() {
                                                     ? 37
                                                     : 0
         : "Group 4 (>6600ft)" == altitudeSel.value
-          ? s <= hms("9:22")
+          ? (b=4,s <= hms("9:22"))
             ? 18
             : s <= hms("9:34")
               ? 19
@@ -4278,8 +4279,8 @@ function calculateAltitudeDiff() {
                                                               : s >= hms("26:07")
                                                                 ? 62
                                                                 : 0
-          : 0;
-  return {'walk': t, 'run': a}
+          :(b=0,0);
+  return {'walk': t, 'run': a, 'shuttle': b}
 }
 altitudeSel.addEventListener('change', () => {
   calculateAltitudeDiff();
@@ -4310,10 +4311,10 @@ function updateScoreMinMaxText() {
 
   let altDiff = calculateAltitudeDiff();
   let run_sel = runSel.value;
-  let run_min = run_sel == '1.5 Mile' ? runTimeString(runmin + altDiff.run) : run_sel == 'Shuttle Run' ? shuttlemin : run_sel == 'Walk' ? '' : '';
-  let run_max = run_sel == '1.5 Mile' ? runTimeString(runmax + altDiff.run) : run_sel == 'Shuttle Run' ? shuttlemax : run_sel == 'Walk' ? runTimeString(walkmax) : '';
-  runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value - altDiff.run, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(runSlider.value, scoreArrays) : run_sel == 'Walk' ? didWalkPass(runSlider.value, scoreArrays) : '';
-  runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_max + " | Max: " + run_min;
+  let run_min = run_sel == '1.5 Mile' ? runTimeString(runmax + altDiff.run) : run_sel == 'Shuttle Run' ? shuttlemin + altDiff.shuttle : run_sel == 'Walk' ? '' : '';
+  let run_max = run_sel == '1.5 Mile' ? runTimeString(runmin + altDiff.run) : run_sel == 'Shuttle Run' ? shuttlemax + altDiff.shuttle : run_sel == 'Walk' ? runTimeString(walkmax+altDiff.walk) : '';
+  runscore = run_sel == '1.5 Mile' ? calculateRunScore(runSlider.value - altDiff.run, scoreArrays.cardio) : run_sel == 'Shuttle Run' ? calculateShuttleScore(Number(runSlider.value) + altDiff.shuttle, scoreArrays) : run_sel == 'Walk' ? didWalkPass(Number(runSlider.value) - altDiff.walk, scoreArrays) : '';
+  runtxt_p.innerHTML = run_sel == 'Exempt' ? "Run Score: EXEMPT" : "Run Score: " + runscore + " | Min: " + run_min + " | Max: " + run_max;
   if (run_sel == '1.5 Mile') {
     runSlider.value <= runmax + altDiff.run ?
       (runSlider.classList.add('slider-green'),
@@ -4361,6 +4362,7 @@ function updateScoreMinMaxText() {
     t_text.classList.add('score-txt-green');
     t_text.classList.remove('score-txt-red');
   }
+  changeLapTime();
 }
 updateScoreMinMaxText();
 
@@ -4538,6 +4540,7 @@ sexSel.addEventListener('change', ageSexChange);
 function oneTxtboxInput() {
   this.value == '' ? this.slider.value = 0 :
     this.slider.value = this.value;
+  changeLapTime();
   updateScoreMinMaxText();
 }
 
@@ -4580,11 +4583,13 @@ function oneTxtboxFocus() {
 
 function twoTxtbox1Input() {
   txtboxToSliderValue(this, this.slider, this.textbox2);
+  changeLapTime();
   updateScoreMinMaxText();
 }
 
 function twoTxtbox2Input() {
   txtboxToSliderValue(this.textbox1, this.slider, this);
+  changeLapTime();
   updateScoreMinMaxText();
 }
 
