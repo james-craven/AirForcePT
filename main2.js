@@ -21,6 +21,9 @@ const sitSection = document.getElementById('sit-sel-chart-section');
 const plankmintxt = document.getElementById('plankmintxt');
 const totalScoreParagraph = document.getElementById('score-txt');
 const altitudeSel = document.getElementById('alt-select');
+const pushBtn = document.getElementById('push-btn');
+const sitBtn = document.getElementById('sit-btn');
+const runBtn = document.getElementById('run-btn');
 
 let runmin;
 let runmax;
@@ -37,6 +40,8 @@ let plankmax;
 let shuttlemin;
 let shuttlemax;
 let runscore;
+let strengthAbsLink;
+let cardioLink;
 
 //Pushup Score Arrays
 var maleLessThan25PushupScores = {
@@ -4695,3 +4700,52 @@ function removeTxtboxEventListeners(textbox1, slider, textbox2) {
   }
 }
 
+const runAltAdjustChart = document.getElementById('run-adjust-chart');
+const walkAltAdjustChart = document.getElementById('walk-adjust-chart');
+const shuttleScoreChart = document.getElementById('shuttle-score-card');
+const shuttleAudio = document.getElementById('shuttle-audio');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const closeBtn = document.getElementById('close-btn');
+
+runAltAdjustChart.addEventListener('click', () => {
+  modalImg.src='./web formatted jpgs/runAltitudeAdjust.webp';
+  modal.removeAttribute('hidden');
+})
+
+closeBtn.addEventListener('click', () => {
+  modal.setAttribute('hidden', true);
+})
+
+walkAltAdjustChart.addEventListener('click', () => {
+  modalImg.src='./web formatted jpgs/walkAltitudeAdjust.webp';
+  modal.removeAttribute('hidden');
+})
+
+shuttleScoreChart.addEventListener('click', () => {
+  modalImg.src='./web formatted jpgs/shuttleScores.webp';
+  modal.removeAttribute('hidden');
+})
+
+pushBtn.addEventListener('click', () => {
+  modalImg.src=strengthAbsLink;
+  modal.removeAttribute('hidden');
+})
+
+sitBtn.addEventListener('click', () => {
+  modalImg.src=strengthAbsLink;
+  modal.removeAttribute('hidden');
+})
+
+runBtn.addEventListener('click', () => {
+  modalImg.src=cardioLink;
+  modal.removeAttribute('hidden');
+})
+
+shuttleAudio.addEventListener('click', () => {
+  let player = document.getElementById('shuttle-audio-player')
+  player.style.visibility == 'hidden' ? 
+  player.style.visibility = 'visible' :
+  player.style.visibility = 'hidden';
+
+});

@@ -8,19 +8,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="modal" hidden>
+        <span class="close-btn" id="close-btn" role="button">&times;</span>
+        <img id="modal-img"></img>
+    </div>
     <!-- Section 1 - Info Button -->
     <section class="info-section">
-        <div>AFPTCalc</div>
+        <div class="logo">AFPTCalc</div>
         <input id="menu-toggle" type="checkbox" />
-        <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
-        </label>
+        <div class="menu-btn-container">
+            <label class='menu-button-container' for="menu-toggle">
+            <div class='menu-button'></div>
+            </label>
+        </div>
         <ul class="menu" id="menu">
-            <li>One</li>
-            <li>Two</li>
-            <li>Three</li>
-            <li>Four</li>
-            <li>Five</li>
+            <li id="run-adjust-chart">See Run Altitude Adjustment Chart</li>
+            <li id="walk-adjust-chart">See Walk/Shuttle Altitude Adjustment Chart</li>
+            <li id="shuttle-score-card">See Shuttle Score Card</li>
+            <li id="shuttle-audio">Show Shuttle Audio</li>
+            <li id="shuttle-audio-player" style="visibility:hidden"> <audio crossorigin="anonymous" preload="auto" src="./shuttle.mp3" controls="controls" id="shuttle-audio">
+                Your browser does not support the audio element.
+                </audio>
+            </li>
         </ul>
     </section>
 
@@ -68,7 +77,7 @@
             </select>
         </div>
         <div class="pushsit-see-chart-btn">
-            <button>See Chart</button>
+            <button id="push-btn">See Chart</button>
         </div>
         <input type="tel" pattern="[0-9]+" class="push-txt" id="push-txt">
         <input type="tel" class="hrpush-txt">
@@ -97,7 +106,7 @@
             </select>
 
         <div id="abs-see-chart-btn" class="pushsit-see-chart-btn">
-            <button>See Chart</button>
+            <button id="sit-btn">See Chart</button>
         </div>
         <input type="tel" class="sit-txt">
         <p class="plank-colon" hidden>:</p>
@@ -128,7 +137,7 @@
             </select>
         </div>
         <div id="cardio-see-chart-btn" class="cardio-see-chart-btn">
-            <button id="see-chart">See Chart</button>
+            <button id="run-btn">See Chart</button>
         </div>
             <input type="tel" class="run-mintxt">
             <p id="colon" class="colon">:</p>
@@ -160,7 +169,11 @@
     </section>
 
     <!-- Reset & Calc Score Btns -->
-    <section></section>
+    <section>
+        <audio crossorigin="anonymous" preload="auto" src="./shuttle.mp3" controls="controls" hidden id="shuttle-audio">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
 
     <script src="main2.js"></script>
 </body>
