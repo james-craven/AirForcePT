@@ -266,6 +266,7 @@ align-items: center;
     align-items: center;
     justify-content: center;
     color: white;
+    font-size: 1.2rem;
 }
 
 /* Section 5 - Strength Select/See Chart Btn */
@@ -326,6 +327,7 @@ align-items: center;
     align-items: center;
     justify-content: center;
     color: white;
+    font-size:1.2rem;
 }
 
 /* Section 8 - Situps Select & Textbox */
@@ -400,11 +402,10 @@ align-items: center;
 
 .run-txt-p {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: .5em;
     align-items: center;
     justify-content: center;
     color: white;
+    font-size:1.2rem;
 }
 
 /* Section 11 - Run Select/See Chart Btn */
