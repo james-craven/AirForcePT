@@ -3853,7 +3853,7 @@ function changeLapTime() {
     let u = runTime(Math.floor(runSlider.value / 6) * (i + 1));
     text += "<br>Lap " + (i + 1) + ": ≤ " + u.minutes + ":" + (u.sec.toFixed(0) < 10 ? '0' + u.sec.toFixed(0) : u.sec.toFixed(0));
   };
-  lapTimeP.innerHTML = runSel.value == '1.5 Mile' || runSel.value == 'Walk' ? text : `Shuttle Level: ${shuttleLevel()}<br>
+  lapTimeP.innerHTML = runSel.value == '1.5 Mile' || runSel.value == 'Walk' ? text : runSel.value == 'Exempt' ? '' : `Shuttle Level: ${shuttleLevel()}<br>
     Current Level Shuttles: ${currentShuttles()}`
 };
 changeLapTime();
@@ -4522,6 +4522,8 @@ function runSelChange() {
     addTxtboxEventListeners(mintxt, runSlider, sectxt);
   } else if (runSel.value == 'Exempt') {
     runSlider.disabled = true;
+    toggleShuttle();
+    changeLapTime();
   }
   setScoreArrays();
   updateScoreMinMaxText();
