@@ -20,7 +20,22 @@
                                 e.waiting && (navigator.serviceWorker.controller ? t || ((t = !0), window.location.reload()) : console.log("Service Worker initialized for the first time: " + e.scope));
                             });
                     });
-                
+                    e.addEventListener("activate", () => {
+                        function isPwa() {
+                            return ["fullscreen", "standalone", "minimal-ui"].some(
+                            (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+                            );
+                        }
+
+                        const isIos = () => {
+                        const userAgent = window.navigator.userAgent.toLowerCase();
+                        return /iphone|ipad|ipod/.test( userAgent );
+                        }
+
+                        if (isIos() && !isPwa()) {
+                            openModal();
+                        }
+                    });
                   }) 
                 };
         </script>
