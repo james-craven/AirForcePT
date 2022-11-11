@@ -42,6 +42,7 @@ let shuttlemax;
 let runscore;
 let strengthAbsLink;
 let cardioLink;
+let deferredPrompt;
 
 //Pushup Score Arrays
 var maleLessThan25PushupScores = {
@@ -4750,4 +4751,62 @@ shuttleAudio.addEventListener('click', () => {
   player.style.visibility = 'visible' :
   player.style.visibility = 'hidden';
 
+});
+
+function isPwa() {
+  return ["fullscreen", "standalone", "minimal-ui"].some(
+      (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+  );
+}
+
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+
+const menu = document.getElementById('menu');
+const li = document.createElement('li');
+
+function installApp() {
+  // Show the prompt
+  deferredPrompt.prompt();
+
+  // Wait for the user to respond to the prompt
+  deferredPrompt.userChoice.then(choiceResult => {
+    if (choiceResult.outcome === "accepted") {
+      console.log("PWA setup accepted");
+    } else {
+      console.log("PWA setup rejected");
+    }
+    deferredPrompt = null;
+    menu.removeChild(li);
+  });
+}
+const installModal = document.getElementById('install-modal');
+const closeInstallModalBtn = document.getElementById('install-close');
+function openModal() {
+  installModal.classList.add('in');
+}
+
+function closeInstallModal() {
+  installModal.style.display = 'none';
+}
+
+closeInstallModalBtn.addEventListener('click', closeInstallModal);
+
+window.addEventListener("beforeinstallprompt", e => {
+  console.log("beforeinstallprompt fired");
+  // Prevent Chrome 76 and earlier from automatically showing a prompt
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  // Show the install button
+  menu.insertBefore(li, menu.firstElementChild);
+  li.innerText = "Download App For Offline Use";
+  li.addEventListener('click', installApp);
+  if (!isPwa()) {
+    openModal();
+  } else {
+
+  }
 });
