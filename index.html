@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFPTCALC</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="theme-color" content="#025981">
+        <title> Air Force AF PT Calculator - Exemptions Walk Altitude Adjustments & Alternate Components</title>
+        <meta name="description" 
+              content="This Air Force PT Calculator contains all the alt alternate components with exemptions!
+                       This AF PT Calc even includes the score charts and sliders for easy real-time test score calculations! Shuttle run audio
+                       is also available. Based on dafman 36-2905 this AF Fitness Calculator is the one stop shop to calculate AF PT Test scores."/>
+        <script>
+              if ("serviceWorker" in navigator) {
+                  window.addEventListener('load', async () => {
+                    t = !1;
+                    const e = await navigator.serviceWorker.register("./sw.js");
+                    e.addEventListener("updatefound", () => {
+                        e.installing &&
+                            e.installing.addEventListener("statechange", () => {
+                                e.waiting && (navigator.serviceWorker.controller ? t || ((t = !0), window.location.reload()) : console.log("Service Worker initialized for the first time: " + e.scope));
+                            });
+                    });
+                
+                  }) 
+                };
+        </script>
+        <link rel="apple-touch-icon" href="./home-screen-icon.png">
+        <link rel="icon" href="./home-screen-icon.png">
+        <link rel="stylesheet" href="style.css">
+        <link rel="manifest" href="./manifest.webmanifest">
+      </head>
 <body>
     <div id="modal" hidden>
         <span class="close-btn" id="close-btn" role="button">&times;</span>
