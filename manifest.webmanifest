@@ -5,19 +5,19 @@
     "theme_color": "#025981",
     "icons": [
       {
-        "src": "home-screen-icon.png",
+        "src": "icon-144x144.png",
         "sizes": "144x144",
         "type": "image/png",
         "purpose": "any"
       },
       {
-        "src": "maskable_icon.png",
-        "sizes": "261x261",
+        "src": "icon-384x384.png",
+        "sizes": "384x384",
         "type": "image/png",
         "purpose": "maskable"
       },
       {
-        "src": "512_maskable_icon.png",
+        "src": "icon-512x512.png",
         "sizes": "512x512",
         "type": "image/png",
         "purpose": "maskable"
