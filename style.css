@@ -50,6 +50,7 @@ section {
   color: #FFF;
   height: 50px;
   padding: 1em;
+  align-items: center!important;
 }
 .logo {
     display: grid;
