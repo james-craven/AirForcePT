@@ -20,22 +20,8 @@
                                 e.waiting && (navigator.serviceWorker.controller ? t || ((t = !0), window.location.reload()) : console.log("Service Worker initialized for the first time: " + e.scope));
                             });
                     });
-                    function isPwa() {
-                            return ["fullscreen", "standalone", "minimal-ui"].some(
-                            (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
-                            );
-                        }
-
-                        const isIos = () => {
-                        const userAgent = window.navigator.userAgent.toLowerCase();
-                        return /iphone|ipad|ipod/.test( userAgent );
-                        }
-
-                        if (isIos() && !isPwa()) {
-                            document.getElementById('install-modal').classList.add('in');
-                        }
-                  }) 
-                };
+                    }
+                )};
         </script>
         <link rel="apple-touch-icon" href="./home-screen-icon.png">
         <link rel="icon" href="./home-screen-icon.png">

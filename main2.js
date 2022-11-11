@@ -4810,3 +4810,15 @@ window.addEventListener("beforeinstallprompt", e => {
 
   }
 });
+
+function isPwa() {
+  return ["fullscreen", "standalone", "minimal-ui"].some(
+  (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+  );
+}
+
+
+console.log(isIos());
+if (isIos() && !isPwa()) {
+  document.getElementById('install-modal').classList.add('in');
+}
