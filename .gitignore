@@ -1,1 +1,6 @@
 node_modules
+.DS_Store
+.gitignore
+512_maskable_icon2.png
+aflogo.jpeg
+main.js
